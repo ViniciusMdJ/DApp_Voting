@@ -12,44 +12,53 @@
     <div class="header">
         <h1>VOTAÇÃO</h1>
     </div>
-    <div class="main">
-      <select name="tags" id="pessoas">
-        <option value="">Selecione uma pessoa</option>
-        <option value="Andre">André Oliveira</option>
-        <option value="Antonio">Antonio Campanharo</option>
-        <option value="Ratonilo">Danilo Erler</option>
-        <option value="eduardo">Eduardo Carneiro</option>
-        <option value="Enzo">Enzo B. Cussuol</option>
-        <option value="Fernando">Fernando Azevedo</option>
-        <option value="Juliana">Juliana Camilo</option>
-        <option value="Altoe">Lucas Altoe</option>
-        <option value="Salgado">Lucas Giovani</option>
-        <option value="Regata">Lucas Moraes</option>
-        <option value="Luis">Luís Eduardo</option>
-        <option value="Nicolas">Nicolas Gall</option>
-        <option value="Rauta">Ricardo Venturotti</option>
-        <option value="Silva">Ricardo Vieira</option>
-        <option value="Sophie">Sophie Dilhon</option>
-        <option value="Thiago">Thiago de Lemos</option>
-        <option value="Brito">Tiago Rodrigues</option>
-        <option value="ulopesu">Usiel Ferreira</option>
-        <option value="Vinicius">Vinicius Moraes</option>
-        <option value="Bonella">Vitor Berger</option>
-      </select>
-      <form>
-        <input type="number" id="qtdTurings" placeholder="Turing's" min="0" max="2000000000000000000">
-      </form>
-      <select name="multiplier" id="exponential">
-        <option value="1">10⁰</option>
-        <option value="1000">10³</option>
-        <option value="1000000">10⁶</option>
-        <option value="1000000000">10⁹</option>
-        <option value="1000000000000">10¹²</option>
-        <option value="1000000000000000">10¹⁵</option>
-        <option value="1000000000000000000">10¹⁸</option>
-      </select>
-      <br>
-      <button id="Votar">Votar</button>
+    <div class="main"> 
+      <div class="flex_container">
+        <div class="codinome_div">
+          <select title="Seleciona uma pessoa:" name="tags" id="pessoas">
+            <!-- <option value="">Selecione uma pessoa</option> -->
+            <option value="Andre">André Oliveira</option>
+            <option value="Antonio">Antonio Campanharo</option>
+            <option value="Ratonilo">Danilo Erler</option>
+            <option value="eduardo">Eduardo Carneiro</option>
+            <option value="Enzo">Enzo B. Cussuol</option>
+            <option value="Fernando">Fernando Azevedo</option>
+            <option value="Juliana">Juliana Camilo</option>
+            <option value="Altoe">Lucas Altoe</option>
+            <option value="Salgado">Lucas Giovani</option>
+            <option value="Regata">Lucas Moraes</option>
+            <option value="Luis">Luís Eduardo</option>
+            <option value="Nicolas">Nicolas Gall</option>
+            <option value="Rauta">Ricardo Venturotti</option>
+            <option value="Silva">Ricardo Vieira</option>
+            <option value="Sophie">Sophie Dilhon</option>
+            <option value="Thiago">Thiago de Lemos</option>
+            <option value="Brito">Tiago Rodrigues</option>
+            <option value="ulopesu">Usiel Ferreira</option>
+            <option value="Vinicius">Vinicius Moraes</option>
+            <option value="Bonella">Vitor Berger</option>
+          </select>
+        </div>
+        <div class="qtdTuring_div">
+          <form>
+            <input type="number" id="qtdTurings" placeholder="Turing's" min="0" max="2000000000000000000">
+          </form>
+        </div>
+        <div class="multiplier_div">
+          <select name="multiplier" id="exponential">
+            <option value="1">10⁰</option>
+            <option value="1000">10³</option>
+            <option value="1000000">10⁶</option>
+            <option value="1000000000">10⁹</option>
+            <option value="1000000000000">10¹²</option>
+            <option value="1000000000000000">10¹⁵</option>
+            <option value="1000000000000000000">10¹⁸</option>
+          </select>
+        </div>
+      </div>
+      <div class="vote_div">
+        <button id="vote">Votar</button>
+      </div>
     </div>
     <div class="basebord">
         <button class="endVoting">
