@@ -361,19 +361,19 @@ const Turing_Contract_ABI = [
 	}
 ];
 
-// const provider = new ethers.providers.Web3Provider(window.ethereum, "goerli");
-//   provider.send("eth_requestAccounts", []).then(() => {
-//     provider.listAccounts().then((accounts) => {
-//       const signer = provider.getSigner(accounts[0]);
+const provider = new ethers.providers.Web3Provider(window.ethereum, "goerli");
+  provider.send("eth_requestAccounts", []).then(() => {
+    provider.listAccounts().then((accounts) => {
+      const signer = provider.getSigner(accounts[0]);
 
-//     /* 3.1 Create instance of Turing smart contract */
-//     TuringContract = new ethers.Contract(
-//       Turing_Contract_Address,
-//       Turing_Contract_ABI,
-//       signer
-//     );
-//   });
-// });
+    /* 3.1 Create instance of Turing smart contract */
+    TuringContract = new ethers.Contract(
+      Turing_Contract_Address,
+      Turing_Contract_ABI,
+      signer
+    );
+  });
+});
 
 const SelectPessoa = document.querySelector("#pessoas");
 const qtdTuringsInput = document.querySelector("input[id='qtdTurings']");
@@ -388,11 +388,11 @@ function votar() {
   var multiplier = SelectMultiplier.value;
   var qtdTuringsFinal = qtdTurings * multiplier;
 
-  // TuringContract.vote(pessoa, qtdTuringsFinal).then(() => {
-  //   qtdTuringsInput.value = "";
-  // }).catch((err) => {
-  //   alert("Error in voting - " + err.message);
-  // });
+  TuringContract.vote(pessoa, qtdTuringsFinal).then(() => {
+    qtdTuringsInput.value = "";
+  }).catch((err) => {
+    alert("Error in voting - " + err.message);
+  });
     
   console.log(pessoa, qtdTuringsFinal);
 }
@@ -407,11 +407,11 @@ function changeMultiplier() {
 SelectMultiplier.addEventListener("change", changeMultiplier);
 
 function endVoting() {
-  // TuringContract.endVoting().then(() => {
-  //   alert("Voting ended");
-  // }).catch((err) => {
-  //   alert("Error in ending voting - " + err.message);
-  // });
+  TuringContract.endVoting().then(() => {
+    alert("Voting ended");
+  }).catch((err) => {
+    alert("Error in ending voting - " + err.message);
+  });
 }
 
 endVotingBtn.addEventListener("click", endVoting);
