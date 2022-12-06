@@ -1,13 +1,10 @@
 let TuringContract;
 
 // 2. Set contract address and ABI
-const Turing_Contract_Address = "0x41853bE1433ee1614389f240eBcfCf3f52eaB3d9";
+const Turing_Contract_Address = "0x72Eed0360126A970F5F7370047eC340B85B02fD4";
+
+
 const Turing_Contract_ABI = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -31,6 +28,31 @@ const Turing_Contract_ABI = [
 			}
 		],
 		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
 		"type": "event"
 	},
 	{
@@ -155,31 +177,6 @@ const Turing_Contract_ABI = [
 		"type": "function"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -225,6 +222,11 @@ const Turing_Contract_ABI = [
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"inputs": [
@@ -358,6 +360,19 @@ const Turing_Contract_ABI = [
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "votingFinished",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
 ];
 
@@ -379,21 +394,22 @@ const SelectPessoa = document.querySelector("#pessoas");
 const qtdTuringsInput = document.querySelector("input[id='qtdTurings']");
 const SelectMultiplier = document.querySelector("#exponential");
 const voteBtn = document.querySelector("#vote");
-const endVotingBtn = document.querySelector("#endVoting");
+const endVotingBtn = document.querySelector("#idEndVoting");
 
 
 function votar() {
-  var qtdTurings = qtdTuringsInput.value;
+  let qtdTurings = qtdTuringsInput.value;	
   var pessoa = SelectPessoa.value;
   var multiplier = SelectMultiplier.value;
-  var qtdTuringsFinal = qtdTurings * multiplier;
+  let qtdTuringsFinal = qtdTurings * multiplier;
+  //   qtdTurings = str(qtdTuringsFinal);
 
-  TuringContract.vote(pessoa, qtdTuringsFinal).then(() => {
+  TuringContract.vote(pessoa, qtdTuringsFinal.toString()).then(() => {
     qtdTuringsInput.value = "";
   }).catch((err) => {
     alert("Error in voting - " + err.message);
   });
-    
+
   console.log(pessoa, qtdTuringsFinal);
 }
 

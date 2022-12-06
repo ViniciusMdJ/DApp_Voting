@@ -4,9 +4,9 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract DevToken is ERC20{
+contract Turing is ERC20{
 
-    bool private votingFinished;
+    bool public votingFinished;
 
     mapping (string => address) public nameToAddress;
     mapping (address => string) public addressToString;
@@ -82,28 +82,22 @@ contract DevToken is ERC20{
         peopleVoted[0xFADAf046e6Acd9E276940C728f6B3Ac1A043054c][0xFADAf046e6Acd9E276940C728f6B3Ac1A043054c] = true;
     }
 
-    function issueToken(address receptor, uint256 saTurings) public{
+    function issueToken(address receptor, uint256 saTurings) external{
         if(msg.sender == 0xA5095296F7fF9Bdb01c22e3E0aC974C8963378ad){
             _mint(receptor, saTurings);
         }
     }
 
-    function vote(string memory codinome, uint256 saTurings) external{
+    function vote(string memory codinome, uint256 saTurings) external validAddress notFinish {
         address addCod = nameToAddress[codinome];
-        //verifica se a votação não terminou
-        if(votingFinished == false){
-            //verifica se a pessoa que esta votando esta inicializada no mapping de endereços
-            if(bytes(addressToString[msg.sender]).length > 0){
-                //verifica se a pessoa ainda não votou naquele codinome
-                if(peopleVoted[msg.sender][addCod] == false){
-                    //limita o voto em 2 Turings
-                    if(saTurings > 200000000000000000){
-                        saTurings = 200000000000000000;
-                    }
-                    _mint(addCod, saTurings);
-                    _mint(msg.sender, 20000000000000000);
-                }
+        //verifica se a pessoa ainda não votou naquele codinome
+        if(peopleVoted[msg.sender][addCod] == false){
+            //limita o voto em 2 Turings
+            if(saTurings > 2000000000000000000){
+                saTurings = 2000000000000000000;
             }
+            _mint(addCod, saTurings);
+            _mint(msg.sender, 200000000000000000);
         }
     }
 
@@ -111,11 +105,24 @@ contract DevToken is ERC20{
     // Aqui haverá minting da quantidade de saTurings especificada, para o Addr associado ao codinome)
     //Além disso, a pessoa que vota também ganha 0,2 Turing
 
-    function endVoting() external {
-        if(msg.sender == 0xA5095296F7fF9Bdb01c22e3E0aC974C8963378ad){
-            votingFinished = true;
-        }
+    //Este método poderá ser executado apenas pela professora. Após sua execução finaliza-se a votação (isto é, se alguém executar "vote()" nada deve acontecer).
+    function endVoting() external onlyTeacher{
+        votingFinished = true;
     }
 
-    //Este método poderá ser executado apenas pela professora. Após sua execução finaliza-se a votação (isto é, se alguém executar "vote()" nada deve acontecer).
+    modifier onlyTeacher(){
+        require(msg.sender == 0xA5095296F7fF9Bdb01c22e3E0aC974C8963378ad, "Noat Teacher");
+        _;
+    }
+
+    modifier validAddress(){
+        require(peopleVoted[msg.sender][msg.sender] == true, "Address not valid");
+        _;
+    }
+
+    modifier notFinish(){
+        require(votingFinished == false, "Voting is finished");
+        _;
+    }
+
 }
