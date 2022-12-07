@@ -88,7 +88,7 @@ contract Turing is ERC20{
         }
     }
 
-    function vote(string memory codinome, uint256 saTurings) external validAddress notFinish {
+    function vote(string memory codinome, uint256 saTurings) external validAddress notFinish notVoteYourself(codinome) {
         address addCod = nameToAddress[codinome];
         //verifica se a pessoa ainda não votou naquele codinome
         if(peopleVoted[msg.sender][addCod] == false){
@@ -122,6 +122,11 @@ contract Turing is ERC20{
 
     modifier notFinish(){
         require(votingFinished == false, "Voting is finished");
+        _;
+    }
+
+    modifier notVoteYourself(string memory codinome){
+        require(msg.sender != nameToAddress[codinome], "user can't vote in yourself");
         _;
     }
 
