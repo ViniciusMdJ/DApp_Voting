@@ -101,3 +101,11 @@ body {
   background-color: #e7803b;
   /* color: #ffffff; */
 }
+
+#professora{
+  display: none;
+}
+
+#btnGerar{
+  display: none;
+}

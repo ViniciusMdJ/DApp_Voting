@@ -390,6 +390,8 @@ const provider = new ethers.providers.Web3Provider(window.ethereum, "goerli");
   });
 });
 
+console.log(TuringContract.Address);
+
 const SelectPessoa = document.querySelector("#pessoas");
 const qtdTuringsInput = document.querySelector("input[id='qtdTurings']");
 const SelectMultiplier = document.querySelector("#exponential");
