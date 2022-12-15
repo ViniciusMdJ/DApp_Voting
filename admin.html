@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Importing css styles -->
+    <link rel="stylesheet" href="./index.css" />
+    <title>Pet dApp</title>
+  </head>
+  <body>
+    <div class="header">
+        <h1>VOTAÇÃO</h1>
+    </div>
+    <div class="main"> 
+      <div class="flex_container" id="professora">
+        <div class="codinome_div">
+          <select title="Seleciona uma pessoa:" name="tags" id="pessoasGerar">
+            <!-- <option value="">Selecione uma pessoa</option> -->
+            <option value="0xD07318971e2C15b4f8d3d28A0AEF8F16B9D8EAb6">André Oliveira</option>
+            <option value="0x127B963B9918261Ef713cB7950c4AD16d4Fe18c6">Antonio Campanharo</option>
+            <option value="0x5d84D451296908aFA110e6B37b64B1605658283f">Danilo Erler</option>
+            <option value="0x500E357176eE9D56c336e0DC090717a5B1119cC2">Eduardo Carneiro</option>
+            <option value="0x5217A9963846a4fD62d35BB7d58eAB2dF9D9CBb8">Enzo B. Cussuol</option>
+            <option value="0xFED450e1300CEe0f69b1F01FA85140646E596567">Fernando Azevedo</option>
+            <option value="0xFec23E4c9540bfA6BBE39c4728652F2def99bc1e">Juliana Camilo</option>
+            <option value="0x6701D0C23d51231E676698446E55F4936F5d99dF">Lucas Altoe</option>
+            <option value="0x8321730F4D59c01f5739f1684ABa85f8262f8980">Lucas Giovani</option>
+            <option value="0x4A35eFD10c4b467508C35f8C309Ebc34ae1e129a">Lucas Moraes</option>
+            <option value="0xDD551702Dc580B7fDa2ddB7a1Ca63d29E8CDCf33">Luís Eduardo</option>
+            <option value="0x01fe9DdD4916019beC6268724189B2EED8C2D49a">Nicolas Gall</option>
+            <option value="0x726150C568f3C7f1BB3C47fd1A224a5C3F706BB1">Ricardo Venturotti</option>
+            <option value="0xCAFE34A88dCac60a48e64107A44D3d8651448cd9">Ricardo Vieira</option>
+            <option value="0xDfb0B8b7530a6444c73bFAda4A2ee3e482dCB1E3">Sophie Dilhon</option>
+            <option value="0xBeb89bd95dD9624dEd83b12dB782EAE30805ef97">Thiago de Lemos</option>
+            <option value="0xEe4768Af8caEeB042Da5205fcd66fdEBa0F3FD4f">Tiago Rodrigues</option>
+            <option value="0x89e66f9b31DAd708b4c5B78EF9097b1cf429c8ee">Usiel Ferreira</option>
+            <option value="0x48cd1D1478eBD643dba50FB3e99030BE4F84d468">Vinicius Moraes</option>
+            <option value="0xFADAf046e6Acd9E276940C728f6B3Ac1A043054c">Vitor Berger</option>
+          </select>
+        </div>
+        <div class="qtdTuring_div">
+          <form>
+            <input type="number" id="qtdGerar" placeholder="Turing's" min="0">
+          </form>
+        </div>
+        <div class="multiplier_div">
+          <select name="multiplier" id="exponentialGerar">
+            <option value="1">10⁰</option>
+            <option value="1000">10³</option>
+            <option value="1000000">10⁶</option>
+            <option value="1000000000">10⁹</option>
+            <option value="1000000000000">10¹²</option>
+            <option value="1000000000000000">10¹⁵</option>
+            <option value="1000000000000000000">Turing<!--10¹⁸--></option>
+          </select>
+        </div>
+      </div>
+      <div class="vote_div" id="btnGerar">
+        <button id="gerar">Gerar</button>
+      </div>
+    </div>
+    <div class="basebord">
+        <button class="endVoting" id="idEndVoting">
+            <h1>Finalizar votação</h1>
+        </button>
+    </div>
+
+    <!-- Importing Ethers.js script -->
+    <script
+      src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+      type="application/javascript"
+    ></script>
+
+    <!-- Importing our javascript file -->
+    <script src="./admin.js"></script>
+  </body>
+</html>
