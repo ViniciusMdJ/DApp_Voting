@@ -57,10 +57,6 @@ body {
   gap: 10px;
 }
 
-.main #pessoas{
-  
-}
-
 #pessoas{
   font-size: 1em;
   font-weight: bold;
@@ -99,13 +95,4 @@ body {
 
 .endVoting:hover {
   background-color: #e7803b;
-  /* color: #ffffff; */
-}
-
-#professora{
-  display: none;
-}
-
-#btnGerar{
-  display: none;
 }
