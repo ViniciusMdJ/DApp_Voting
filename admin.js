@@ -1,15 +1,10 @@
 let TuringContract;
 
 // 2. Set contract address and ABI
-const Turing_Contract_Address = "0xB26834d7180b6b16Eda20D69e85A5f7e4b90E190";
+const Turing_Contract_Address = "0x72Eed0360126A970F5F7370047eC340B85B02fD4";
 
 
 const Turing_Contract_ABI = [
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -33,6 +28,31 @@ const Turing_Contract_ABI = [
 			}
 		],
 		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
 		"type": "event"
 	},
 	{
@@ -157,31 +177,6 @@ const Turing_Contract_ABI = [
 		"type": "function"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -227,6 +222,11 @@ const Turing_Contract_ABI = [
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"inputs": [
@@ -377,52 +377,32 @@ const Turing_Contract_ABI = [
 ];
 
 const provider = new ethers.providers.Web3Provider(window.ethereum, "goerli");
-  provider.send("eth_requestAccounts", []).then(() => {
-    provider.listAccounts().then((accounts) => {
-      const signer = provider.getSigner(accounts[0]);
+provider.send("eth_requestAccounts", []).then(() => {
+	provider.listAccounts().then((accounts) => {
+		const signer = provider.getSigner(accounts[0]);
 
-    /* 3.1 Create instance of Turing smart contract */
-    TuringContract = new ethers.Contract(
-      Turing_Contract_Address,
-      Turing_Contract_ABI,
-      signer
-    );
-  });
+		/* 3.1 Create instance of Turing smart contract */
+		TuringContract = new ethers.Contract(
+			Turing_Contract_Address,
+			Turing_Contract_ABI,
+			signer
+		);
+	});
 });
 
-console.log(TuringContract.Address);
 
-const SelectPessoa = document.querySelector("#pessoas");
-const qtdTuringsInput = document.querySelector("input[id='qtdTurings']");
-const SelectMultiplier = document.querySelector("#exponential");
-const voteBtn = document.querySelector("#vote");
+const SelectPessoaGerar = document.querySelector("#pessoasGerar");
+const qtdTuringsInputGerar = document.querySelector("input[id='qtdGerar']");
+const SelectMultiplierGerar = document.querySelector("#exponentialGerar");
+const gerarBtn = document.querySelector("#gerar");
 const endVotingBtn = document.querySelector("#idEndVoting");
 
-
-function votar() {
-  let qtdTurings = qtdTuringsInput.value;	
-  var pessoa = SelectPessoa.value;
-  var multiplier = SelectMultiplier.value;
-  let qtdTuringsFinal = qtdTurings * multiplier;
-  //   qtdTurings = str(qtdTuringsFinal);
-
-  TuringContract.vote(pessoa, qtdTuringsFinal.toString()).then(() => {
-    qtdTuringsInput.value = "";
-  }).catch((err) => {
-    alert("Error in voting - " + err.message);
-  });
-
-  console.log(pessoa, qtdTuringsFinal);
-}
-
-voteBtn.addEventListener("click", votar);
-
 function changeMultiplier() {
-  var multiplier = SelectMultiplier.value;
-  qtdTuringsInput.setAttribute("max", (2*10**18) / multiplier);
+  var multiplier = SelectMultiplierGerar.value;
+  SelectMultiplierGerar.setAttribute("max", (2*10**18) / multiplier);
 }
 
-SelectMultiplier.addEventListener("change", changeMultiplier);
+SelectMultiplierGerar.addEventListener("change", changeMultiplier);
 
 function endVoting() {
   TuringContract.endVoting().then(() => {
@@ -433,3 +413,18 @@ function endVoting() {
 }
 
 endVotingBtn.addEventListener("click", endVoting);
+
+function gerarToken(){
+	let qtdTurings = qtdTuringsInputGerar.value;	
+	var pessoa = SelectPessoaGerar.value;
+	var multiplier = SelectMultiplierGerar.value;
+	let qtdTuringsFinal = qtdTurings * multiplier;
+
+	TuringContract.issueToken(pessoa, qtdTuringsFinal.toString()).then(() => {
+		SelectMultiplierGerar.value = "";
+	  }).catch((err) => {
+		alert("Error in voting - " + err.message);
+	  });
+}
+
+gerarBtn.addEventListener("click", gerarToken);

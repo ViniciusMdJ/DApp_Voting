@@ -12,10 +12,10 @@
     <div class="header">
         <h1>VOTAÇÃO</h1>
     </div>
-    <div class="main"> 
+    <div class="main">
       <div class="flex_container">
         <div class="codinome_div">
-          <select title="Seleciona uma pessoa:" name="tags" id="pessoas">
+          <select title="Seleciona uma pessoa:" name="tags" id="pessoasVote">
             <!-- <option value="">Selecione uma pessoa</option> -->
             <option value="Andre">André Oliveira</option>
             <option value="Antonio">Antonio Campanharo</option>
@@ -45,7 +45,7 @@
           </form>
         </div>
         <div class="multiplier_div">
-          <select name="multiplier" id="exponential">
+          <select name="multiplier" id="exponentialVote">
             <option value="1">10⁰</option>
             <option value="1000">10³</option>
             <option value="1000000">10⁶</option>
@@ -56,14 +56,11 @@
           </select>
         </div>
       </div>
-      <div class="vote_div">
+      <div class="vote_div" id="btnVote">
         <button id="vote">Votar</button>
       </div>
     </div>
     <div class="basebord">
-        <button class="endVoting" id="idEndVoting">
-            <h1>Finalizar votação</h1>
-        </button>
     </div>
 
     <!-- Importing Ethers.js script -->
